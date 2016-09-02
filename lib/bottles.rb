@@ -16,16 +16,19 @@ Take it down and pass it around, no more bottles of beer on the wall.
 2 bottles of beer on the wall, 2 bottles of beer.
 Take one down and pass it around, 1 bottle of beer on the wall.
     VERSE
-    when 99
-      <<-VERSE.gsub /^\s+/, ""
-      99 bottles of beer on the wall, 99 bottles of beer.
-      Take one down and pass it around, 98 bottles of beer on the wall.
-      VERSE
     else
       <<-VERSE
-89 bottles of beer on the wall, 89 bottles of beer.
-Take one down and pass it around, 88 bottles of beer on the wall.
+#{i} bottles of beer on the wall, #{i} bottles of beer.
+Take one down and pass it around, #{i-1} bottles of beer on the wall.
 VERSE
     end
+  end
+
+  def verses(end_verse, start_verse)
+    end_verse.downto(start_verse).map { |v| verse(v) }.join("\n")
+  end
+
+  def song
+    verses(99, 0)
   end
 end
