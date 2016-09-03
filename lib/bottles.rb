@@ -1,4 +1,4 @@
-class BottleCount
+class Container
   def initialize(count)
     @count = count
   end
@@ -24,12 +24,12 @@ class Bottles
   TOTAL = 99
 
   def verse(i)
-    count = BottleCount.new(i)
+    count = Container.new(i)
     case i
     when 0
       <<-VERSE
 No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, #{BottleCount.new(TOTAL)} of beer on the wall.
+Go to the store and buy some more, #{Container.new(TOTAL)} of beer on the wall.
     VERSE
     when 1
       expected = <<-VERSE
