@@ -17,11 +17,9 @@ class Container
   def to_s
     case to_i
     when 0
-      "no more bottles of beer"
-    when 1
-      "#{to_i} bottle of beer"
+      "no more #{pluralized} of beer"
     else
-      "#{to_i} bottles of beer"
+      "#{to_i} #{pluralized} of beer"
     end
   end
 
@@ -39,6 +37,16 @@ class Container
       self.class.new(99)
     else
       self.class.new(to_i - 1)
+    end
+  end
+
+  private
+
+  def pluralized
+    if to_i == 1
+      "bottle"
+    else
+      "bottles"
     end
   end
 end
