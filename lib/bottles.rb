@@ -33,9 +33,10 @@ class Container
     end
   end
 
-  def -(other)
+  def take_one(other)
     self.class.new(to_i - other.to_i)
   end
+  alias - take_one
 end
 
 class Bottles
