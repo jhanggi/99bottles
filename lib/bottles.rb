@@ -8,9 +8,10 @@ class Container
   end
 
   def to_s
-    if to_i == 0
+    case to_i
+    when 0
       "no more bottles"
-    elsif to_i == 1
+    when 1
       "#{to_i} bottle"
     else
       "#{to_i} bottles"
@@ -18,10 +19,11 @@ class Container
   end
 
   def pronoun
-    if to_i > 1
-      "one"
-    else
+    case to_i
+    when 1
       "it"
+    else
+      "one"
     end
   end
 
