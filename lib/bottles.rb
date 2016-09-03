@@ -34,10 +34,13 @@ class Container
     end
   end
 
-  def take_one(other)
-    self.class.new(to_i - other.to_i)
+  def succ
+    if to_i == 0
+      self.class.new(99)
+    else
+      self.class.new(to_i - 1)
+    end
   end
-  alias - take_one
 end
 
 class Bottles
@@ -47,7 +50,7 @@ class Bottles
     count = Container.new(i)
 
     [situation(count),
-     action_and_resolution(count),
+     "#{action(count)}, #{in_location(count.succ)}.",
      "" # to get the extra newline
     ].join("\n")
   end
@@ -70,11 +73,11 @@ class Bottles
     "#{count} on the wall"
   end
 
-  def action_and_resolution(count)
+  def action(count)
     if count.to_i == 0
-      "Go to the store and buy some more, #{in_location(TOTAL)}."
+      "Go to the store and buy some more"
     else
-      "Take #{count.pronoun} down and pass it around, #{in_location(count - 1)}."
+       "Take #{count.pronoun} down and pass it around"
     end
   end
 
