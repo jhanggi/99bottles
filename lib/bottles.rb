@@ -1,6 +1,7 @@
 require "forwardable"
 
 class Container
+
   extend Forwardable
 
   def_delegator :to_i, :downto
@@ -16,11 +17,11 @@ class Container
   def to_s
     case to_i
     when 0
-      "no more bottles"
+      "no more bottles of beer"
     when 1
-      "#{to_i} bottle"
+      "#{to_i} bottle of beer"
     else
-      "#{to_i} bottles"
+      "#{to_i} bottles of beer"
     end
   end
 
@@ -44,18 +45,11 @@ class Bottles
 
   def verse(i)
     count = Container.new(i)
-    case i
-    when 0
-      <<-VERSE
-No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, #{TOTAL} of beer on the wall.
-    VERSE
-    else
-      <<-VERSE
-#{count} of beer on the wall, #{count} of beer.
-Take #{count.pronoun} down and pass it around, #{count - 1} of beer on the wall.
-VERSE
-    end
+
+    [situation(count),
+     action_and_resolution(count),
+     "" # to get the extra newline
+    ].join("\n")
   end
 
   def verses(end_verse, start_verse)
@@ -65,4 +59,23 @@ VERSE
   def song
     verses(TOTAL, 0)
   end
+
+  private
+
+  def situation(count)
+    "#{in_location(count).capitalize}, #{count}."
+  end
+
+  def in_location(count)
+    "#{count} on the wall"
+  end
+
+  def action_and_resolution(count)
+    if count.to_i == 0
+      "Go to the store and buy some more, #{in_location(TOTAL)}."
+    else
+      "Take #{count.pronoun} down and pass it around, #{in_location(count - 1)}."
+    end
+  end
+
 end
