@@ -1,4 +1,10 @@
+require "forwardable"
+
 class Container
+  extend Forwardable
+
+  def_delegator :to_i, :downto
+
   def initialize(count)
     @count = count
   end
@@ -33,7 +39,7 @@ class Container
 end
 
 class Bottles
-  TOTAL = 99
+  TOTAL = Container.new(99)
 
   def verse(i)
     count = Container.new(i)
@@ -41,7 +47,7 @@ class Bottles
     when 0
       <<-VERSE
 No more bottles of beer on the wall, no more bottles of beer.
-Go to the store and buy some more, #{Container.new(TOTAL)} of beer on the wall.
+Go to the store and buy some more, #{TOTAL} of beer on the wall.
     VERSE
     else
       <<-VERSE
