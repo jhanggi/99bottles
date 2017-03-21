@@ -9,12 +9,11 @@ class Bottles
 
   def verse(number)
     bottle_number = BottleNumber.new(number)
-    next_bottle_number = BottleNumber.new(bottle_number.successor)
 
-    "#{bottle_number.quantity.capitalize} #{bottle_number.container} of beer on the wall, " +
-    "#{bottle_number.quantity} #{bottle_number.container} of beer.\n" +
+    "#{bottle_number} of beer on the wall, ".capitalize +
+    "#{bottle_number} of beer.\n" +
     "#{bottle_number.action}, " +
-    "#{next_bottle_number.quantity} #{next_bottle_number.container} of beer on the wall.\n"
+    "#{bottle_number.successor} of beer on the wall.\n"
   end
 end
 
@@ -22,6 +21,10 @@ class BottleNumber
   attr_reader :number
   def initialize(number)
     @number = number
+  end
+
+  def to_s
+    "#{quantity} #{container}"
   end
 
   def container
@@ -58,9 +61,9 @@ class BottleNumber
 
   def successor
     if number == 0
-      99
+      BottleNumber.new(99)
     else
-      number - 1
+      BottleNumber.new(number - 1)
     end
   end
 end
