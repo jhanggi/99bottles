@@ -26,12 +26,14 @@ class BottleNumber
   def self.for(number)
     case number
     when 0
-      BottleNumber0.new
+      BottleNumber0
     when 1
-      BottleNumber1.new
+      BottleNumber1
+    when 6
+      BottleNumber6
     else
-      BottleNumber.new(number)
-    end
+      BottleNumber
+    end.new(number)
   end
 
   def to_s
@@ -61,10 +63,6 @@ class BottleNumber
 end
 
 class BottleNumber0 < BottleNumber
-  def initialize
-    super(0)
-  end
-
   def quantity
     "no more"
   end
@@ -79,15 +77,21 @@ class BottleNumber0 < BottleNumber
 end
 
 class BottleNumber1 < BottleNumber
-  def initialize
-    super(1)
-  end
-
   def container
     "bottle"
   end
 
   def pronoun
     "it"
+  end
+end
+
+class BottleNumber6 < BottleNumber
+  def quantity
+    "1"
+  end
+
+  def container
+    "six-pack"
   end
 end
