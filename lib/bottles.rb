@@ -24,9 +24,10 @@ class BottleNumber
   end
 
   def self.for(number)
-    if number == 0
+    case number
+    when 0
       BottleNumber0.new
-    elsif number == 1
+    when 1
       BottleNumber1.new
     else
       BottleNumber.new(number)
