@@ -24,13 +24,8 @@ class BottleNumber
   end
 
   def self.for(number)
-    case number
-    when 0
-      BottleNumber0
-    when 1
-      BottleNumber1
-    when 6
-      BottleNumber6
+    if const_defined?("BottleNumber#{number}")
+      const_get("BottleNumber#{number}")
     else
       BottleNumber
     end.new(number)
